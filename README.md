@@ -1,1 +1,1 @@
-simple java API for refs.
+simple java API for reference
