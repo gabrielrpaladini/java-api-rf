@@ -2,6 +2,7 @@ package com.paladini.libraryapi.api.resource;
 
 import com.paladini.libraryapi.api.dto.BookDTO;
 import com.paladini.libraryapi.api.exception.ApiErrors;
+import com.paladini.libraryapi.api.exception.BusinessException;
 import com.paladini.libraryapi.api.model.entity.Book;
 import com.paladini.libraryapi.api.service.BookService;
 import org.modelmapper.ModelMapper;
@@ -42,5 +43,11 @@ public class BookController {
         BindingResult bindingResult = exception.getBindingResult();
 
         return new ApiErrors(bindingResult);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrors handleBusinessException(BusinessException businessException) {
+        return new ApiErrors(businessException);
     }
 }
